@@ -23,7 +23,7 @@ export default function Type() {
       <section className="flex flex-col items-center h-screen w-full">
         <div className="flex items-center justify-between w-full px-4 py-2  shadow-md">
           <h1 className="text-2xl font-bold">Tipo</h1>
-          <Modal labelButton="Cadastrar" >
+          <Modal modal={{labelButton:"Cadastrar Tipos", title:"Tipos"}} >
             <CategoryForm />
           </Modal>
         </div>

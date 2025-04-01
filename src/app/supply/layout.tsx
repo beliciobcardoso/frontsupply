@@ -1,18 +1,12 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ThemeProvider } from "@/components/theme-provider"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import type { Metadata } from "next";
+import { cookies } from "next/headers";
+
+import { AppSidebar } from "@/components/app-sidebar";
+import { ThemeProvider } from "@/components/theme-provider"
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+
+
 
 export const metadata: Metadata = {
   title: "Suprimentos",
@@ -24,9 +18,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const cookieStore = await cookies()
+  const defaultOpen = cookieStore.get('sidebar_state')?.value === 'true'
+
   return (
     <html lang="pt-Br" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -36,7 +34,12 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SidebarProvider defaultOpen={defaultOpen}>
+            <AppSidebar />
+            <SidebarInset>
+              {children}
+            </SidebarInset>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -2,7 +2,7 @@ import { Modal } from "@/components/modal";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
-import { CategoryForm } from "./form";
+import { TypeForm } from "../type/form";
 
 export default function Category() {
     return (
@@ -24,7 +24,7 @@ export default function Category() {
                 <div className="flex items-center justify-between w-full px-4 py-2  shadow-md">
                     <h1 className="text-2xl font-bold">Categoria</h1>
                     <Modal modal={{ labelButton: "Nova Categoria", title: "Adicionar Categoria" }}>
-                        <CategoryForm />
+                        <TypeForm />
                     </Modal>
                 </div>
             </section>
