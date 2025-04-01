@@ -20,7 +20,7 @@ export default function Home() {
       </header>
       <section className="flex flex-col items-center h-screen w-full">
         <div className="flex items-center justify-between w-full px-4 py-2  shadow-md">
-          <h1 className="text-2xl font-bold">Calendário</h1>
+          <h1 className="text-2xl font-bold">Página Principal</h1>
         </div>
       </section>
     </main>

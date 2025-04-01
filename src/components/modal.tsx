@@ -8,12 +8,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-type props = {
+interface props {
+  modal: {
     labelButton: string
-    children?: React.ReactNode
+    title: string
+    description?: string
+  }
+  children: React.ReactNode
 }
 
-export function Modal({labelButton, children}: props) {
+export function Modal({ modal, children }: props) {
+
+  const { labelButton, title, description } = modal
+  
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -21,9 +28,9 @@ export function Modal({labelButton, children}: props) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            {description}
           </DialogDescription>
         </DialogHeader>
         {children}

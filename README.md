@@ -13,6 +13,9 @@ pnpm dev
 # or
 bun dev
 ```
+A new version of `create-next-app` is available!
+You can update by running: npm i -g create-next-app
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
