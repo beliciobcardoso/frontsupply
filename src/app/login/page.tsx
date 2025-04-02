@@ -1,9 +1,11 @@
+import { LoginForm } from "@/components/login-form"
 
-
-export default function Login() {
-    return (
-        <main className="flex flex-col h-[calc(100vh-1rem)] w-full">
-            <h1>Login</h1>
-        </main>
-    )
+export default function Page() {
+  return (
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <LoginForm />
+      </div>
+    </div>
+  )
 }

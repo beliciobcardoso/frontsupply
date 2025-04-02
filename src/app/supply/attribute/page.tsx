@@ -2,6 +2,7 @@ import { Modal } from "@/components/modal";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
+import { AttributeForm } from "./form";
 
 export default function Attribute() {
   return (
@@ -22,7 +23,9 @@ export default function Attribute() {
       <section className="flex flex-col items-center h-screen w-full">
         <div className="flex items-center justify-between w-full px-4 py-2  shadow-md">
           <h1 className="text-2xl font-bold">Atributo</h1>
-          <Modal labelButton="Cadastrar" />
+          <Modal modal={{labelButton: "Cadastrar Atributos", title: "Cadastro de Atributos"}}>
+            <AttributeForm />
+          </Modal>
         </div>
       </section>
     </main>

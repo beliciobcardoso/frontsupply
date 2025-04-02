@@ -13,9 +13,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
-import { Category } from "../category/columns"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react"
 
 type Token = {
   valueToken: string
@@ -24,28 +22,13 @@ type Token = {
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   acronym: z.string().min(2).max(2),
-  categoryId: z.string().min(1, { message: "Selecione uma categoria" }),
 })
 
 type FormaSchema = z.infer<typeof formSchema>
 
-export function GroupForm({ valueToken }: Token) {
+export function AttributeTypesForm({valueToken}: Token) {
   const router = useRouter()
   const [modal, setModal] = useState(false)
-  const [categories, setCategories] = useState<Category[]>([])
-
-
-  useEffect(() => {
-    const fetchDatas = async () => {
-      const datas = await fetch("http://10.0.3.211:8080/api/v1/supplies/categories", {
-        method: "GET",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${valueToken}` },
-      }).then((res) => res.json()) as { categories: Category[] }
-
-      setCategories(datas.categories)
-    }
-    fetchDatas()
-  }, [])
 
   const form = useForm<FormaSchema>({
     resolver: zodResolver(formSchema),
@@ -58,10 +41,10 @@ export function GroupForm({ valueToken }: Token) {
   async function onSubmit(data: FormaSchema) {
     const { name, acronym } = data
 
-    const datas = await fetch("http://10.0.3.211:8080/api/v1/supplies/groups", {
+    const datas = await fetch("http://10.0.3.211:8080/api/v1/supplies/attributeTypes", {
       method: "POST",
       body: JSON.stringify({ name, acronym }),
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${valueToken}` },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${valueToken}`},
     })
 
     if (!datas.ok) {
@@ -70,7 +53,7 @@ export function GroupForm({ valueToken }: Token) {
       return
     }
 
-    router.refresh()
+    router.push("/supply/category")
     form.reset()
     setModal(false)
   }
@@ -85,36 +68,12 @@ export function GroupForm({ valueToken }: Token) {
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-lg p-4 space-y-4">
           <FormField
             control={form.control}
-            name="categoryId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="sr-only">Grupo</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Escolha uma Categoria" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {categories?.map((item) => (
-                      <SelectItem key={item.id} value={String(item.id)}>
-                        {item.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="sr-only">Nome</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nome do Grupo" {...field} />
+                  <Input placeholder="Nome do Tipos de Atributos" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -127,7 +86,7 @@ export function GroupForm({ valueToken }: Token) {
               <FormItem>
                 <FormLabel className="sr-only">Sigla</FormLabel>
                 <FormControl>
-                  <Input placeholder="Sigla do Grupo" {...field} />
+                  <Input placeholder="Sigla do Tipos de Atributos" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

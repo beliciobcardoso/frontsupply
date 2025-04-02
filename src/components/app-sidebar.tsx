@@ -55,32 +55,32 @@ const data = {
   projects: [
     {
       name: "Categoria",
-      url: "/category",
+      url: "/supply/category",
       icon: Frame,
     },
     {
       name: "Grupos",
-      url: "/group",
+      url: "/supply/group",
       icon: PieChart,
     },
     {
       name: 'Tipos',
-      url: '/type',
+      url: "/supply/type",
       icon: Bot,
     },
     {
       name: "Tipos de Atributos",
-      url: "/attribute-type",
+      url: "/supply/attribute-type",
       icon: Map,
     },
     {
       name: 'Atributos',
-      url: '/attribute',
+      url: "/supply/attribute",
       icon: BookOpen,
     },
     {
       name: "Produtos",
-      url: "/product",
+      url: "/supply/product",
       icon: SquareTerminal,
     }
   ],
